@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        border: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 80vh;
+        width: 98vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #000;
+      }
+      canvas {
+        border: 2px solid white;
+        width: 100%;
+        max-width: 720px;
+        height: auto;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas class="canvas"></canvas>
+    <script>
+      const cnv = document.querySelector("canvas");
+      const ctx = cnv.getContext("2d");
+
+      const mesa = () => {
+        ctx.fillStyle = "green";
+        ctx.fillRect(0, 0, cnv.height, cnv.width);
+        ctx.fillRect(-0, -0, cnv.width, cnv.height);
+      };
+      const rede = () => {
+        ctx.fillStyle = 'white'
+        ctx.fillRect(cnv.width / 2, 0, 2,cnv.height)
+      }
+      const bola = () => {
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.arc(cnv.width / 2, cnv.height / 2, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.closePath();
+      };
+      const raquetes = ()=> {
+          const paddleWidth = 10;
+          const paddleHeight = 40;
+          const paddleY1 = cnv.height / 2 - paddleHeight / 2;
+          const paddleY2 = cnv.height / 2 - paddleHeight / 2;
+
+        const raqueteP1 = () => {
+          ctx.fillStyle = "white";
+          ctx.fillRect(0, paddleY1, paddleWidth, paddleHeight);
+        };
+
+        const raqueteP2 = () => {
+          ctx.fillStyle = "white";
+          ctx.fillRect(cnv.width - paddleWidth, paddleY2, paddleWidth,paddleHeight);
+        };
+
+        document.addEventListener('keydown', () => {
+
+        })
+
+        return raqueteP1(), raqueteP2();
+      };
+      const draw = (raqueteP1, raqueteP2) => {
+        ctx.clearRect(0, 0, cnv.width, cnv.height);
+
+        mesa();
+
+        rede()
+
+        bola();
+
+        raquetes();
+
+        requestAnimationFrame(draw);
+      };
+      draw();
+    </script>
+  </body>
+</html>
